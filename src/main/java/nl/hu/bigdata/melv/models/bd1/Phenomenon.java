@@ -7,8 +7,8 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "phenomenomtype")
-public class PhenomenomType {
+@Table(name = "phenomenon")
+public class Phenomenon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,6 +16,10 @@ public class PhenomenomType {
 
     @Column(length = 50)
     private String name;
+
+    @JoinColumn(name = "phenomenomtype_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private PhenomenonType phenomenonType;
 
     public int getId() {
         return id;
@@ -31,5 +35,13 @@ public class PhenomenomType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public PhenomenonType getPhenomenonType() {
+        return phenomenonType;
+    }
+
+    public void setPhenomenonType(PhenomenonType phenomenonType) {
+        this.phenomenonType = phenomenonType;
     }
 }

@@ -15,7 +15,7 @@ public class CategoryObservation {
     private int id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Phenomenom phenomenom;
+    private Phenomenon phenomenon;
 
     public int getId() {
         return id;
@@ -25,11 +25,11 @@ public class CategoryObservation {
         this.id = id;
     }
 
-    public Phenomenom getPhenomenom() {
-        return phenomenom;
+    public Phenomenon getPhenomenon() {
+        return phenomenon;
     }
 
-    public void setPhenomenom(Phenomenom phenomenom) {
-        this.phenomenom = phenomenom;
+    public void setPhenomenon(Phenomenon phenomenon) {
+        this.phenomenon = phenomenon;
     }
 }

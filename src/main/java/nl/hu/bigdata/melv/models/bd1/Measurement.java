@@ -19,7 +19,7 @@ public class Measurement {
 
     @JoinColumn(name = "phenomenomtype_id")
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private PhenomenomType phenomenomType;
+    private PhenomenonType phenomenonType;
 
     public int getId() {
         return id;
@@ -37,11 +37,11 @@ public class Measurement {
         this.quantity = quantity;
     }
 
-    public PhenomenomType getPhenomenomType() {
-        return phenomenomType;
+    public PhenomenonType getPhenomenonType() {
+        return phenomenonType;
     }
 
-    public void setPhenomenomType(PhenomenomType phenomenomType) {
-        this.phenomenomType = phenomenomType;
+    public void setPhenomenonType(PhenomenonType phenomenonType) {
+        this.phenomenonType = phenomenonType;
     }
 }

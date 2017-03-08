@@ -15,14 +15,23 @@
         <property name="hibernate.connection.password">root</property>
 
         <!-- List of XML mapping files -->
+
+        <!--
         <mapping class="nl.hu.bigdata.melv.models.bd1.CategoryObservation"/>
         <mapping class="nl.hu.bigdata.melv.Employee"/>
         <mapping class="nl.hu.bigdata.melv.models.bd1.Measurement"/>
         <mapping class="nl.hu.bigdata.melv.models.bd1.Observation"/>
         <mapping class="nl.hu.bigdata.melv.models.bd1.Person"/>
-        <mapping class="nl.hu.bigdata.melv.models.bd1.Phenomenom"/>
-        <mapping class="nl.hu.bigdata.melv.models.bd1.PhenomenomType"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd1.Phenomenon"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd1.PhenomenonType"/>
         <mapping class="nl.hu.bigdata.melv.models.bd1.Quantity"/>
+        -->
+
+        <mapping class="nl.hu.bigdata.melv.models.bd2.Date"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd2.Measurement"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd2.Person"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd2.Phenomenon"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd2.Unit"/>
 
     </session-factory>
 </hibernate-configuration>

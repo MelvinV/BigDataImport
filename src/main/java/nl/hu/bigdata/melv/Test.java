@@ -1,7 +1,7 @@
 package nl.hu.bigdata.melv;
 
-import nl.hu.bigdata.melv.models.bd1.Phenomenom;
-import nl.hu.bigdata.melv.models.bd1.PhenomenomType;
+import nl.hu.bigdata.melv.models.bd1.Phenomenon;
+import nl.hu.bigdata.melv.models.bd1.PhenomenonType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -26,14 +26,14 @@ public class Test {
         e2.setFirstName("Gabrielle");
         e2.setLastName("Nugteren");
 
-        PhenomenomType phenomenomType = new PhenomenomType();
-        phenomenomType.setName("Blood Pressure");
+        PhenomenonType phenomenonType = new PhenomenonType();
+        phenomenonType.setName("Blood Pressure");
 
-        Phenomenom phenomenom = new Phenomenom();
-        phenomenom.setName("High Pressure");
-        phenomenom.setPhenomenomType(phenomenomType);
+        Phenomenon phenomenon = new Phenomenon();
+        phenomenon.setName("High Pressure");
+        phenomenon.setPhenomenonType(phenomenonType);
 
-        session.persist(phenomenom);
+        session.persist(phenomenon);
 
         session.persist(e1);
         session.persist(e2);

@@ -1,6 +1,5 @@
 package nl.hu.bigdata.melv;
 
-import nl.hu.bigdata.melv.models.bd1.Observation;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,13 +12,29 @@ public class DB {
 
     private SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
 
-    public void insert(Observation observation)
+    public Object save(Object object)
     {
         Session session = sessionFactory.openSession();
 
         Transaction t = session.beginTransaction();
 
-        session.persist(observation);
+        //session.saveOrUpdate(object);
+        session.save(object);
+
+        t.commit();
+        session.close();
+
+        return object;
+    }
+
+    public void insert(Object object)
+    {
+        Session session = sessionFactory.openSession();
+
+        Transaction t = session.beginTransaction();
+
+        //session.saveOrUpdate(object);
+        session.persist(object);
 
         t.commit();
         session.close();
