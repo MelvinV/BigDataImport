@@ -27,11 +27,20 @@
         <mapping class="nl.hu.bigdata.melv.models.bd1.Quantity"/>
         -->
 
+        <!--
         <mapping class="nl.hu.bigdata.melv.models.bd2.Date"/>
         <mapping class="nl.hu.bigdata.melv.models.bd2.Measurement"/>
         <mapping class="nl.hu.bigdata.melv.models.bd2.Person"/>
         <mapping class="nl.hu.bigdata.melv.models.bd2.Phenomenon"/>
         <mapping class="nl.hu.bigdata.melv.models.bd2.Unit"/>
+        -->
+
+        <mapping class="nl.hu.bigdata.melv.models.bd3.Date"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd3.Measurement"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd3.Person"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd3.Phenomenon"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd3.PhenomenonType"/>
+        <mapping class="nl.hu.bigdata.melv.models.bd3.Unit"/>
 
     </session-factory>
 </hibernate-configuration>

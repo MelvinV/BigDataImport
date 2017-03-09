@@ -1,6 +1,6 @@
 package nl.hu.bigdata.melv;
 
-import nl.hu.bigdata.melv.models.bd2.*;
+import nl.hu.bigdata.melv.models.bd3.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * Created by melvin on 8-3-2017.
  */
-public class DataImport2 {
+public class DataImport3 {
 
     private DB DB = new DB();
 
@@ -38,18 +38,25 @@ public class DataImport2 {
         return person;
     }
 
-    public nl.hu.bigdata.melv.models.bd2.Date createDatetime(Date datetime)
+    public nl.hu.bigdata.melv.models.bd3.Date createDatetime(Date datetime)
     {
-        nl.hu.bigdata.melv.models.bd2.Date date = new nl.hu.bigdata.melv.models.bd2.Date();
+        nl.hu.bigdata.melv.models.bd3.Date date = new nl.hu.bigdata.melv.models.bd3.Date();
         date.setDatetime(datetime);
         return date;
     }
 
-    public Phenomenon createPhenomenon(String name, String type)
+    public PhenomenonType createPhenomenonType(String name)
+    {
+        PhenomenonType phenomenonType = new PhenomenonType();
+        phenomenonType.setName(name);
+        return phenomenonType;
+    }
+
+    public Phenomenon createPhenomenon(String name, PhenomenonType phenomenonType)
     {
         Phenomenon phenomenon = new Phenomenon();
         phenomenon.setName(name);
-        phenomenon.setType(type);
+        phenomenon.setPhenomenonType(phenomenonType);
         return phenomenon;
     }
 
@@ -60,7 +67,7 @@ public class DataImport2 {
         return unit;
     }
 
-    public Measurement createMeasurement(Person person, nl.hu.bigdata.melv.models.bd2.Date datetime, Phenomenon phenomenon, Unit unit, float amount)
+    public Measurement createMeasurement(Person person, nl.hu.bigdata.melv.models.bd3.Date datetime, Phenomenon phenomenon, Unit unit, float amount)
     {
         Measurement measurement = new Measurement();
         measurement.setPerson_id((long)person.getId());
@@ -96,7 +103,7 @@ public class DataImport2 {
                 DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
                 DateTime dt = formatter.parseDateTime(values[0]);
 
-                nl.hu.bigdata.melv.models.bd2.Date datetime = createDatetime(dt.toDate());
+                nl.hu.bigdata.melv.models.bd3.Date datetime = createDatetime(dt.toDate());
                 DB.save(datetime);
 
                 float amount = Float.parseFloat(values[1]);
@@ -143,7 +150,7 @@ public class DataImport2 {
                 DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
                 DateTime dt = formatter.parseDateTime(values[0]);
 
-                nl.hu.bigdata.melv.models.bd2.Date datetime = createDatetime(dt.toDate());
+                nl.hu.bigdata.melv.models.bd3.Date datetime = createDatetime(dt.toDate());
                 DB.save(datetime);
 
                 float amount = Float.parseFloat(values[1]);
@@ -190,7 +197,7 @@ public class DataImport2 {
                 DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
                 DateTime dt = formatter.parseDateTime(values[0]);
 
-                nl.hu.bigdata.melv.models.bd2.Date datetime = createDatetime(dt.toDate());
+                nl.hu.bigdata.melv.models.bd3.Date datetime = createDatetime(dt.toDate());
                 DB.save(datetime);
 
                 float amountSystolic = Float.parseFloat(values[1]);
@@ -221,40 +228,40 @@ public class DataImport2 {
     {
         long startTime = System.currentTimeMillis();
 
-        DataImport2 dataImport2 = new DataImport2();
+        DataImport3 dataImport3 = new DataImport3();
 
-        Person personAmadoOheam = dataImport2.createPerson("Amado Oheam");
-        dataImport2.getDB().save(personAmadoOheam);
-        Person personJessieDamelio = dataImport2.createPerson("Jessie Damelio");
-        dataImport2.getDB().save(personJessieDamelio);
-        Person personMikeNormand = dataImport2.createPerson("Mike Normand");
-        dataImport2.getDB().save(personMikeNormand);
+        Person personAmadoOheam = dataImport3.createPerson("Amado Oheam");
+        dataImport3.getDB().save(personAmadoOheam);
+        Person personJessieDamelio = dataImport3.createPerson("Jessie Damelio");
+        dataImport3.getDB().save(personJessieDamelio);
+        Person personMikeNormand = dataImport3.createPerson("Mike Normand");
+        dataImport3.getDB().save(personMikeNormand);
 
-        Phenomenon phenomenonHeartRate = dataImport2.createPhenomenon("Heart Rate", "Heart Rate");
-        dataImport2.getDB().save(phenomenonHeartRate);
-        Unit unitHeartRate = dataImport2.createUnit("Beats per minute");
-        dataImport2.getDB().save(unitHeartRate);
-        dataImport2.importDataHeartRate("csv/hr.AmadoOhearn.csv", personAmadoOheam, phenomenonHeartRate, unitHeartRate);
-        dataImport2.importDataHeartRate("csv/hr.JessieDamelio.csv", personJessieDamelio, phenomenonHeartRate, unitHeartRate);
-        dataImport2.importDataHeartRate("csv/hr.MikeNormand.csv", personMikeNormand, phenomenonHeartRate, unitHeartRate);
+        Phenomenon phenomenonHeartRate = dataImport3.createPhenomenon("Heart Rate", dataImport3.createPhenomenonType("Heart Rate"));
+        dataImport3.getDB().save(phenomenonHeartRate);
+        Unit unitHeartRate = dataImport3.createUnit("Beats per minute");
+        dataImport3.getDB().save(unitHeartRate);
+        dataImport3.importDataHeartRate("csv/hr.AmadoOhearn.csv", personAmadoOheam, phenomenonHeartRate, unitHeartRate);
+        dataImport3.importDataHeartRate("csv/hr.JessieDamelio.csv", personJessieDamelio, phenomenonHeartRate, unitHeartRate);
+        dataImport3.importDataHeartRate("csv/hr.MikeNormand.csv", personMikeNormand, phenomenonHeartRate, unitHeartRate);
 
-        Phenomenon phenomenonTemperature = dataImport2.createPhenomenon("Temperature", "Temperature");
-        dataImport2.getDB().save(phenomenonTemperature);
-        Unit unitTemperature = dataImport2.createUnit("Degrees Celcius");
-        dataImport2.getDB().save(unitTemperature);
-        dataImport2.importDataTemperature("csv/temp.AmadoOhearn.csv", personAmadoOheam, phenomenonTemperature, unitTemperature);
-        dataImport2.importDataTemperature("csv/temp.JessieDamelio.csv", personJessieDamelio, phenomenonTemperature, unitTemperature);
-        dataImport2.importDataTemperature("csv/temp.MikeNormand.csv", personMikeNormand, phenomenonTemperature, unitTemperature);
+        Phenomenon phenomenonTemperature = dataImport3.createPhenomenon("Temperature", dataImport3.createPhenomenonType("Temperature"));
+        dataImport3.getDB().save(phenomenonTemperature);
+        Unit unitTemperature = dataImport3.createUnit("Degrees Celcius");
+        dataImport3.getDB().save(unitTemperature);
+        dataImport3.importDataTemperature("csv/temp.AmadoOhearn.csv", personAmadoOheam, phenomenonTemperature, unitTemperature);
+        dataImport3.importDataTemperature("csv/temp.JessieDamelio.csv", personJessieDamelio, phenomenonTemperature, unitTemperature);
+        dataImport3.importDataTemperature("csv/temp.MikeNormand.csv", personMikeNormand, phenomenonTemperature, unitTemperature);
 
-        Phenomenon phenomenonBloodPressureSystolic = dataImport2.createPhenomenon("Systolic", "Systolic");
-        dataImport2.getDB().save(phenomenonBloodPressureSystolic);
-        Phenomenon phenomenonBloodPressureDiastolic = dataImport2.createPhenomenon("Diastolic", "Diastolic");
-        dataImport2.getDB().save(phenomenonBloodPressureDiastolic);
-        Unit unitBloodPressure = dataImport2.createUnit("Blood Pressure");
-        dataImport2.getDB().save(unitBloodPressure);
-        dataImport2.importDataBloodPressure("csv/bp.AmadoOhearn.csv", personAmadoOheam, phenomenonBloodPressureSystolic, phenomenonBloodPressureDiastolic, unitBloodPressure);
-        dataImport2.importDataBloodPressure("csv/bp.JessieDamelio.csv", personJessieDamelio, phenomenonBloodPressureSystolic, phenomenonBloodPressureDiastolic, unitBloodPressure);
-        dataImport2.importDataBloodPressure("csv/bp.MikeNormand.csv", personMikeNormand, phenomenonBloodPressureSystolic, phenomenonBloodPressureDiastolic, unitBloodPressure);
+        Phenomenon phenomenonBloodPressureSystolic = dataImport3.createPhenomenon("Systolic", dataImport3.createPhenomenonType("Systolic"));
+        dataImport3.getDB().save(phenomenonBloodPressureSystolic);
+        Phenomenon phenomenonBloodPressureDiastolic = dataImport3.createPhenomenon("Diastolic", dataImport3.createPhenomenonType("Diastolic"));
+        dataImport3.getDB().save(phenomenonBloodPressureDiastolic);
+        Unit unitBloodPressure = dataImport3.createUnit("Blood Pressure");
+        dataImport3.getDB().save(unitBloodPressure);
+        dataImport3.importDataBloodPressure("csv/bp.AmadoOhearn.csv", personAmadoOheam, phenomenonBloodPressureSystolic, phenomenonBloodPressureDiastolic, unitBloodPressure);
+        dataImport3.importDataBloodPressure("csv/bp.JessieDamelio.csv", personJessieDamelio, phenomenonBloodPressureSystolic, phenomenonBloodPressureDiastolic, unitBloodPressure);
+        dataImport3.importDataBloodPressure("csv/bp.MikeNormand.csv", personMikeNormand, phenomenonBloodPressureSystolic, phenomenonBloodPressureDiastolic, unitBloodPressure);
 
         long endTime   = System.currentTimeMillis();
         long totalTime = endTime - startTime;
